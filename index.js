@@ -2,7 +2,7 @@ const https = require("https");
 const { verify } = require("./config");
 const { build } = require("./queries");
 
-async function execute(query, variables) {
+async function execute(config, query, variables) {
 
     const body = JSON.stringify({ query, variables });
     return await new Promise((resolve, reject) => {
@@ -65,7 +65,7 @@ module.exports = {
         let safety = 100;
         do {
             const query = queries["repos-with-prs"];
-            const res = await execute(query, variables);
+            const res = await execute(config, query, variables);
             if (res.errors) {
                 console.error(JSON.stringify(res.errors, null, 3));
                 throw new Error("Query failed");
