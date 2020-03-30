@@ -1,0 +1,49 @@
+query ($organization_login: String!, $repositories_after: String) {
+  organization(login: $organization_login) {
+    id
+    repositories(first: 100, after: $repositories_after) {
+      totalCount
+      pageInfo {
+        startCursor
+        hasNextPage
+        endCursor
+      }
+      edges {
+        node {
+          id
+          name
+          pullRequests(first: 30, states: OPEN, orderBy: {field: CREATED_AT, direction: ASC}) {
+            nodes {
+              title
+              state
+              createdAt
+              author {
+                login
+              }
+              reviews(first: 20) {
+                nodes {
+                  author {
+                    login
+                  }
+                  state
+                  createdAt
+                  submittedAt
+                }
+              }
+              reviewRequests(first: 20) {
+                nodes {
+                  requestedReviewer {
+                    ... on User {
+                      id
+                      login
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
