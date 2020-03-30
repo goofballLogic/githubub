@@ -1,4 +1,10 @@
 query ($organization_login: String!, $repositories_after: String) {
+  rateLimit {
+    limit
+    cost
+    remaining
+    resetAt
+  }
   organization(login: $organization_login) {
     id
     repositories(first: 100, after: $repositories_after) {
