@@ -1,5 +1,5 @@
 const https = require("https");
-const { verify } = require("config");
+const { verify } = require("./config");
 const { build } = require("./queries");
 
 async function execute(query, variables) {
