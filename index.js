@@ -1,5 +1,5 @@
 const https = require("https");
-const config = require("./config");
+const { verify } = require("config");
 const { build } = require("./queries");
 
 async function execute(query, variables) {
@@ -55,8 +55,9 @@ function formatPR(node) {
 
 module.exports = {
 
-    async fetchPRs() {
+    async fetchPRs(config) {
 
+        verify(config);
         const queries = await build();
 
         let variables = { organization_login: config.org };
