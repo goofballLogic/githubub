@@ -1,6 +1,6 @@
 {
   "name": "githubub",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "PR monitoring ",
   "main": "index.js",
   "scripts": {
